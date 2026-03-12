@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-</head>
-<body>
+
+    <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#ff6b81">
+
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -14,5 +16,17 @@
     });
   });
 </script>
+<script>
+setTimeout(function(){
+  location.href="/love/love.html";
+},2000);
+</script>
+
+</head>
+
+<body>
+
+<p>잠시만 기다려 주세요...</p>
+
 </body>
 </html>
