@@ -1,0 +1,30 @@
+name: Send Push Notification
+
+on:
+  schedule:
+    - cron: "0 23 * * *"   # 한국시간 아침 8시
+  workflow_dispatch:
+
+jobs:
+  send_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Push
+        run: |
+          messages=("오늘두 화이팅!" "진짜 마니 보고싶어 바부야" "바부야 오늘 하루도 화이팅! \n 무서우면 나 안고 있어 사랑해 학교 잘 갔다 와"
+          "나 영원히 너꺼야 \n 걱정 마 오늘 하루도 나 안고 버텨 ")
+
+          random_index=$((RANDOM % ${#messages[@]}))
+          message=${messages[$random_index]}
+
+          curl --request POST \
+          --url https://onesignal.com/api/v1/notifications \
+          --header "Authorization: Basic ${{ secrets.ONESIGNAL_API_KEY }}" \
+          --header "Content-Type: application/json" \
+          --data "{
+            \"app_id\": \"${{ secrets.ONESIGNAL_APP_ID }}\",
+            \"included_segments\": [\"All\"],
+            \"headings\": {\"en\": \"💌 메시지\"},
+            \"contents\": {\"en\": \"$message\"}
+          }"
