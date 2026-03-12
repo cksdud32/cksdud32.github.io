@@ -41,6 +41,6 @@ jobs:
           --data "{
             \"app_id\": \"${{ secrets.ONESIGNAL_APP_ID }}\",
             \"included_segments\": [\"All\"],
-            \"headings\": {\"en\": \"to.뚜별 from.찬영❤\"},
+            \"headings\": {\"en\": \"to.뚜별❤ from.찬영❤\"},
             \"contents\": {\"en\": \"$message\"}
           }"
