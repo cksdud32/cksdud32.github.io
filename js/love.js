@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. JSON 데이터 가져오기
     async function fetchYearData(year) {
         try {
-            const response = await fetch(`love${year}.json`);
+            const response = await fetch(`json/love${year}.json`);
             const data = await response.json();
             renderArchive(data);
         } catch (err) {

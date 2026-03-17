@@ -47,7 +47,7 @@ body {
     justify-content: center; /* 버튼 가운데 정렬 */
 }
 
-.y2026, .y2027 {
+.y2025, .y2026, .y2027 {
     width: 180px; height: 60px; /* 높이 살짝 조정 */
     text-align: center;
     line-height: 60px;
@@ -63,7 +63,7 @@ body {
     transition: 0.3s;
 }
 
-.y2026:hover, .y2027:hover {
+.y2025:hover, .y2026:hover, .y2027:hover {
     background-color: #ff4d6d;
     color: white;
 }
