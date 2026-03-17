@@ -1,0 +1,240 @@
+@charset "UTF-8";
+
+/* 기본 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{ text-decoration: none; color: #333;}
+li{ list-style-type: none;}
+
+body {
+    font-family: "Pretendard", "Apple SD Gothic Neo", "굴림", Sans-serif; /* 폰트 가독성 상향 */
+    line-height: 1.6;
+    background-color: #FFB6C1;
+    color: #333;
+}
+
+/* 제목 영역 */
+.love-h1 {
+    width: 100%; 
+    height: auto; /* 높이 고정보다는 내용에 맞게 */
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.love-h1 h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.love-h1 p {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* 년도 선택 버튼 */
+.love-y {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.love-y ul {
+    display: flex;
+    justify-content: center; /* 버튼 가운데 정렬 */
+}
+
+.y2026, .y2027 {
+    width: 180px; height: 60px; /* 높이 살짝 조정 */
+    text-align: center;
+    line-height: 60px;
+    background-color: #fff; /* 핑크 배경에 aqua보다는 흰색이 감성적이에요 */
+    color: #ff4d6d;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+    border-radius: 30px; /* 둥글게 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.y2026:hover, .y2027:hover {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+/* 기록 영역 초기 상태 */
+.live-m {
+    display: none; /* JS에서 클릭 시 나타남 */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 월 섹션 */
+.month-section {
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.month-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff4d6d;
+    margin-bottom: 20px;
+    border-left: 5px solid #ff4d6d; /* 포인트 강조 */
+    padding-left: 15px;
+}
+
+/* 가로 스크롤 래퍼 */
+.day-wrapper {
+    display: flex;           
+    overflow-x: auto;        
+    gap: 20px;            
+    padding-bottom: 20px;    
+    scroll-snap-type: x mandatory; 
+    scrollbar-width: none; /* Firefox */
+}
+
+.day-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+/* [핵심] 데이 카드 */
+.day-card {
+    flex: 0 0 250px; /* 카드 너비 */
+    height: 350px; /* 카드 높이 */
+    background: #000; /* 사진 불투명도를 위한 검정 배경 */
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.day-card:hover {
+    transform: translateY(-10px);
+}
+
+/* 사진 프레임 및 이미지 */
+.photo-frame {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5; /* 기본 불투명도 */
+    filter: blur(1.5px); /* 기본 블러 */
+    transition: all 0.5s ease;
+}
+
+.day-card:hover .photo-frame img {
+    opacity: 1; /* 호버 시 선명하게 */
+    filter: blur(0px);
+    transform: scale(1.1); /* 살짝 확대 */
+}
+
+/* [핵심] 사진 위 중앙 글씨 */
+.photo-text { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 90%;
+    text-align: center; 
+    color: white; 
+    z-index: 2;
+    pointer-events: none; /* 카드 클릭 이벤트를 방해하지 않음 */
+}
+
+.card-date-title { 
+    display: block; 
+    font-weight: bold; 
+    font-size: 1.4rem; 
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7); /* 글씨 그림자로 가독성 확보 */
+}
+
+.photo-text p { 
+    font-size: 1rem; 
+    opacity: 0.9;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    word-break: keep-all; /* 단어 단위 줄바꿈 */
+}
+
+/* 모달(팝업) 스타일 */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85); /* 좀 더 어둡게 */
+}
+
+.modal-content {
+    background-color: #fff; 
+    margin: 5vh auto;
+    width: 90%; 
+    max-width: 1000px; 
+    height: 80vh;
+    border-radius: 25px; 
+    overflow: hidden; 
+    position: relative;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-body { display: flex; height: 100%; }
+
+.modal-left {
+    flex: 1.2; /* 텍스트 영역을 조금 더 넓게 */
+    padding: 50px;
+    border-right: 1px solid #eee;
+    overflow-y: auto;
+}
+
+.modal-left h2 {
+    font-size: 2rem;
+    color: #ff4d6d;
+    margin-bottom: 20px;
+}
+
+.modal-right {
+    flex: 1; 
+    padding: 25px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px;
+    overflow-y: auto;
+    background: #fdf2f4;
+}
+
+.modal-right img {
+    width: 100%; 
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.close-btn {
+    position: absolute; 
+    top: 25px; right: 30px;
+    font-size: 40px; 
+    cursor: pointer; 
+    z-index: 10;
+    color: #999;
+}
+
+.close-btn:hover { color: #ff4d6d; }
