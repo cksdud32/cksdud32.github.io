@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderArchive(data);
         } catch (err) {
             console.error("데이터 로딩 실패:", err);
-            alert(`${year}년 기록(json/love${year}.json)을 불러올 수 없습니다.`);
+            alert(`${year}년 기록을 불러오지 못했습니다.`);
         }
     }
 
